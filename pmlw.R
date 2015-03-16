@@ -22,7 +22,7 @@ trainingIndexes <- createDataPartition(data$classe,p = 0.60,list = F)
 training <- data[trainingIndexes,]
 testing <- data[-trainingIndexes,]
 
-#number of variavles after pca is 18 , vith 90 % variance captured
+#number of variables after pca is 18 , vith 90 % variance captured
 pP <- preProcess(training[,-52],method=c("center","scale","pca"),thresh = 0.9)
 
 trainObj <-predict(pP,training[,-52])
