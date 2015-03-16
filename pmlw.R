@@ -22,15 +22,13 @@ trainingIndexes <- createDataPartition(data$classe,p = 0.60,list = F)
 training <- data[trainingIndexes,]
 testing <- data[-trainingIndexes,]
 
-trainingControl <- trainControl(method = "repeatedcv",number = 10,repeats = 10,verboseIter = T)
-
 #number of variavles after pca is 18 , vith 90 % variance captured
 pP <- preProcess(training[,-52],method=c("center","scale","pca"),thresh = 0.9)
 
 trainObj <-predict(pP,training[,-52])
 trainObj$classe <- training$classe
 
-  modelFit <- train(classe ~.,data = trainObj,trControl = trainingControl,method = "glm" )
+  modelFit <- train(classe ~.,data = trainObj,trControl = trainingControl,method = "rf" )
 
 trainObj <-predict(pP,testing[,-52])
 
