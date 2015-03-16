@@ -96,15 +96,13 @@ data &lt;- read.csv(&quot;pml-training_cleaned.csv&quot;)
 training &lt;- data[trainingIndexes,]
 testing &lt;- data[-trainingIndexes,]
 
-trainingControl &lt;- trainControl(method = &quot;repeatedcv&quot;,number = 10,repeats = 10,verboseIter = T)
-
 #number of variables after pca is 18 , vith 90 % variance captured
 pP &lt;- preProcess(training[,-52],method=c(&quot;center&quot;,&quot;scale&quot;,&quot;pca&quot;),thresh = 0.9)
 
 trainObj &lt;-predict(pP,training[,-52])
 trainObj$classe &lt;- training$classe
 
-  modelFit &lt;- train(classe ~.,data = trainObj,trControl = trainingControl,method = &quot;rf&quot; )</code></pre>
+  modelFit &lt;- train(classe ~.,data = trainObj,method = &quot;rf&quot; )</code></pre>
 <pre><code>## Aggregating results
 ## Fitting final model on full training set</code></pre>
 <pre class="r"><code>trainObj &lt;-predict(pP,testing[,-52])
